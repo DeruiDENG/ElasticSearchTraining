@@ -1,5 +1,7 @@
 # Index exercise
-* Create a new index called listing
+* Run the sample code below (line by line)
+* Remove the second listing `2 Church St, Richmond`
+* List all the listings in the index
 * Query for a listing with the address containing the word: `Blakeview`
 
 Sample code to start with:

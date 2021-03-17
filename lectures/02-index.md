@@ -28,14 +28,24 @@ POST /listings/_doc
 }
 
 # List document
-GET listings/_doc
+GET /listings/_search
+{
+    "query": {
+        "match_all": {}
+    }
+}
 
 GET listings/_doc/1
 
 # Delete a document
 DELETE listings/_doc/1
 
-GET listings/_doc
+GET /listings/_search
+{
+    "query": {
+        "match_all": {}
+    }
+}
 
 # Query for a document
 GET /listings/_search
@@ -43,7 +53,7 @@ GET /listings/_search
   "query": {
     "match": {
       "address": {
-        "query": "Churches"
+        "query": "Blakeview"
       }
     }
   }

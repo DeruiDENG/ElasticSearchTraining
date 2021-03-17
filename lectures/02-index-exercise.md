@@ -26,7 +26,13 @@ POST /listings/_doc
   "address": "1 Churches St, Blakeview"
 }
 
-# Query for a document
 # WRITE YOUR QUERY HERE
 
+# 1. List all listings
+
+# 2. Delete a listing
+
+# 3. List all listings
+
+# 4. Query for 'Blakeview'
 ```

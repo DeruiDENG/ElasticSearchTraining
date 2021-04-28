@@ -8,49 +8,46 @@ PUT /listing
 # Put multiple documents into elastic search in one shot
 POST /listing/_bulk
 { "index": {}}
-{ "address": "9 Malambing Street, UP Village U.P.", "title": "3 Storey Townhouses (7 Units) in Teachers Village Quezon City", "price": 13 }
+{ "price": 13, "year": 2018, "title":"18 Madge, Taman U-Thant, Ampang Hilir" }
 { "index": {}}
-{ "address": "Philippines, Metro Manila, Quezon City, Batasan Hills Batasan Hills, Quezon City", "title": "2-Storey Townhouse for Sale in Filinvest Northview, QC", "price": 4.8 }
+{ "price": 15, "year": 2018, "title":"Nobleton Crest, Taman U-Thant, Ampang Hilir" }
 { "index": {}}
-{ "address": "Bank Drive Ortigas Business Center behind SM Mega Mall Wack-Wack Greenhills, Mandaluyong", "title": "BSA Twin Towers Condo Unit near SM Megamall, ADB, La Salle, Poveda, Podium", "price": 18.5 }
+{ "price": 15, "year": 2017, "title":"Nobleton Crest, Taman U-Thant, Ampang Hilir" }
+{ "index": {}}
+{ "price": 15, "year": 2010, "title":"Taman Sri Ukay, Ampang" }
 
-GET /listing/_mapping
-
-# Search for text
+# Default sort
 GET /listing/_search
 {
   "query": {
     "match": {
-      "address": {
-        "query": "quezon manila malambing",
+      "title": {
+        "query": "Ampang Crest",
         "operator": "or"
       }
     }
   }
 }
 
-# Sort by price
+# Sort by year
 GET /listing/_search
 {
   "query": {
     "match": {
-      "address": {
-        "query": "quezon manila malambing",
+      "title": {
+        "query": "Ampang Crest",
         "operator": "or"
       }
     }
   },
   "sort": [
     {
-      "price": {
+      "year": {
         "order": "desc"
       }
     },
-    {
-      
-    }
+    "_score"
   ]
 }
 
-# Multiple sort
 ```

@@ -7,9 +7,9 @@ It assumes an instructor will verbally explain a lot of the material.
 ## Topics
 
 - Hello World
-- Manage index 
+- Manage index
+- Indexing/putting documents 
 - Understand mappings
-- Indexing/putting documents
 - Text analysis(Analyzers)
 - Queries
     - Term query
@@ -18,6 +18,7 @@ It assumes an instructor will verbally explain a lot of the material.
     - Range query
     - Bool query
     - Sort the result
+- Others advance stuff preview
 
 ## Prerequisites
 

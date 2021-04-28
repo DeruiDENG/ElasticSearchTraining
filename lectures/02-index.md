@@ -7,6 +7,9 @@ An index is like a ‘database’ in a relational database.
 
 ## Index APIs
 
+// Introduction on how to use devtools
+
+
 ```text
 # Create a new index
 PUT /listings
@@ -28,7 +31,6 @@ POST /listings/_doc
 }
 
 # List document
-<<<<<<< HEAD
 GET /listings/_search
 {
     "query": {

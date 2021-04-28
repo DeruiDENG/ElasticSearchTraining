@@ -55,7 +55,6 @@ POST /listing/_doc
 GET /listing/_mapping
 
 ```
-
 ## Explicit mappings
 
 Explicit mapping allows you to precisely choose how to define the mapping definition, such as:
@@ -63,6 +62,8 @@ Explicit mapping allows you to precisely choose how to define the mapping defini
 * Which fields contain numbers, dates, or geolocations.
 * The format of date values.
 * Custom rules to control the mapping for dynamically added fields.
+
+https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-types.html
 
 ```text
 DELETE /listing
@@ -114,13 +115,31 @@ PUT /listing/_mapping
 
 GET /listing/_mapping
 
-# Update the mapping of a field.
-# This will not work. You will have to do reindex.
+# Update the mapping of a field. (Will not work)
 PUT /listing/_mapping
 {
   "properties": {
     "ReferenceNumber": {
       "type": "text"
+    }
+  }
+}
+
+# Multi-field mapping:
+# Add a mutli-field mapping
+PUT /listing/_mapping
+{
+  "properties": {
+    "ReferenceNumber": {
+      "type":"long",
+      "fields": {
+        "english": {
+          "type": "text"
+        },
+        "raw": {
+          "type":"keyword"
+        }
+      }
     }
   }
 }

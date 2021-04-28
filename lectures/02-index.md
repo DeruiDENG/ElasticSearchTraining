@@ -28,6 +28,7 @@ POST /listings/_doc
 }
 
 # List document
+<<<<<<< HEAD
 GET /listings/_search
 {
     "query": {
@@ -35,7 +36,7 @@ GET /listings/_search
     }
 }
 
-GET listings/_doc/1
+GET listings/_doc/{id}
 
 # Delete a document
 DELETE listings/_doc/1

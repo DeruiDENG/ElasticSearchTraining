@@ -19,52 +19,58 @@ Two types:
 * ElasticSearch will `guess` the mapping for the document
 
 ```text
-# Create a new index
 DELETE /listing
-PUT /listings
+PUT /listing
 
 # Index JSON document
-POST /listings/_doc
+POST /listing/_doc
 {
   "address": "1 Church St, Richmond",
   "postedDate": "16 Mar 2021",
-  "Storey": 3,
+  "Storey": 3
 }
 
-POST /listings/_doc
+POST /listing/_doc
 {
-  "address": "1 Churches St, Blakeview"
+  "address": "1 Churches St, Blakeview",
   "postedDate": "12 Mar 2020",
-  "Storey": 2,
+  "Storey": 2
 }
 
 # Get dynamic mappings
-GET /listings/_mapping
+GET /listing/_mapping
 
 # Get mapping for specific field
-GET /listings/_mapping/field/Storey
+GET /listing/_mapping/field/Storey
 
 # Mapping will be updated when new documents are added
-POST /listings/_doc
+POST /listing/_doc
 {
-  "address": "1 Churches St, Blakeview"
+  "address": "1 Churches St, Blakeview",
   "postedDate": "12 Mar 2020",
   "Storey": 2,
   "ReferenceNumber": 101727193
 }
 
-GET /listings/_mapping
+GET /listing/_mapping
 
 ```
 
 ## Explicit mappings
+
+Explicit mapping allows you to precisely choose how to define the mapping definition, such as:
+* Which string fields should be treated as full text fields.
+* Which fields contain numbers, dates, or geolocations.
+* The format of date values.
+* Custom rules to control the mapping for dynamically added fields.
+
 ```text
 DELETE /listing
 
-PUT /listings
+PUT /listing
 
 # Specify the mapping
-PUT /listings/_mapping
+PUT /listing/_mapping
 {
   "properties": {
     "address": {
@@ -72,20 +78,51 @@ PUT /listings/_mapping
     },
     "postedDate": {
       "type": "date"
-    }
+    },
     "Storey": {
       "type": "long"
     }
   }
 }
 
-POST /listings/_doc
+# Get the current mapping
+GET /listing/_mapping
+
+# Get the mapping of specified field
+GET /listing/_mapping/field/postedDate
+
+# Index a document
+POST /listing/_doc
 {
-  "address": "1 Churches St, Blakeview"
-  "postedDate": "12 Mar 2020",
+  "address": "1 Churches St, Blakeview",
+  "postedDate": "2015-01-01",
   "Storey": 2,
   "ReferenceNumber": 101727193
 }
 
-GET /listings/_mapping
+GET /listing/_mapping
+
+# Add a field to existing mapping
+PUT /listing/_mapping
+{
+  "properties": {
+    "ReferenceNumber": {
+      "type": "text"
+    }
+  }
+}
+
+GET /listing/_mapping
+
+# Update the mapping of a field.
+# This will not work. You will have to do reindex.
+PUT /listing/_mapping
+{
+  "properties": {
+    "ReferenceNumber": {
+      "type": "text"
+    }
+  }
+}
+
 ```

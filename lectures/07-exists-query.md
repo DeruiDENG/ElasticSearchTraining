@@ -1,4 +1,4 @@
-# Bool query
+# Exists query
 Returns documents that contain an indexed value for a field.
 
 An indexed value may not exist for a document’s field due to a variety of reasons:

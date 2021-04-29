@@ -67,17 +67,4 @@ GET /users/_search
   }
 }
 
-# Search by range
-GET /users/_search
-{
-  "query": {
-    "range": {
-      "yearOfBirth": {
-        "gte": 1970,
-        "lte": 1980
-      }
-    }
-  }
-}
-
 ```

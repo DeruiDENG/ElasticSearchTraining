@@ -6,10 +6,6 @@ An optimized collection of JSON documents. Each document is a collection of fiel
 An index is like a ‘database’ in a relational database.
 
 ## Index APIs
-
-// Introduction on how to use devtools
-
-
 ```text
 # Create a new index
 PUT /listings

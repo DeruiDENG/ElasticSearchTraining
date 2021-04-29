@@ -7,7 +7,7 @@ Let's get your hand wet.
 
 Create an environment with:
 ```bash
-scripts/up
+docker-compose up
 ```
 
 Wait a while.  It will take quite a while for everything to start!
@@ -22,5 +22,5 @@ Wait a while.  It will take quite a while for everything to start!
 Shutdown:
 
 ```
-./scripts/destroy
+cmd+c
 ```

@@ -11,6 +11,8 @@ POST /users/_bulk
 {"index":{}}
 {"name":"Emna Mizouni","title":"Developer","dob":"1983-03-04","height":162,"gender":"female","address":"25 Smith St, Brunswick, VIC 3056"}
 
+
+# Answers:
 GET /users/_search
 {
   "query": {

@@ -1,6 +1,6 @@
 # Compound query exercise
 Given a list of listings, 
-* Create a query get all the listing that is `in hobart, with house property type AND sold before 2017-01-01`
+* Create a query get all the listing that is `in hobart OR melbourne, with house property type AND sold before 2017-01-01`
 
 ```text
 DELETE /listing

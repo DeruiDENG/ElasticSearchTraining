@@ -1,6 +1,6 @@
 # Term query exercise
 Given a list of users
-* Create a query to get all the `Male`
+* Create a query to get all the `Male` users
 * Create a query to get all the `Developer` and `Senior Developer`
 
 ## Hints:

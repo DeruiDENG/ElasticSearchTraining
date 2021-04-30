@@ -1,6 +1,6 @@
 # Sort exercise
 Give a list of users,
-* Create a query to match all users, people with `bigger height coming first`
+* Create a query to match all users, people with `taller height coming first`
 * If height of the users are the same, `younger people coming first`
 
 Hints:

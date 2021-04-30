@@ -104,6 +104,7 @@ POST /listing/_doc
 GET /listing/_mapping
 
 # Add a field to existing mapping
+// Double check
 PUT /listing/_mapping
 {
   "properties": {
@@ -143,5 +144,7 @@ PUT /listing/_mapping
     }
   }
 }
+
+// example of query
 
 ```

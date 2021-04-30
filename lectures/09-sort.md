@@ -45,9 +45,28 @@ GET /listing/_search
       "year": {
         "order": "desc"
       }
+    }
+  ]
+}
+
+# Sort by multiple factors
+GET /listing/_search
+{
+  "query": {
+    "match": {
+      "title": {
+        "query": "Ampang Crest",
+        "operator": "or"
+      }
+    }
+  },
+  "sort": [
+    {
+      "year": {
+        "order": "desc"
+      }
     },
     "_score"
   ]
 }
-
 ```

@@ -55,6 +55,8 @@ GET /listing/_search
   }
 }
 
+// Introduce more powerful search
+
 # Search for word in multiple fields
 GET /listing/_search
 {

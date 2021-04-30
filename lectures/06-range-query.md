@@ -33,6 +33,8 @@ GET /users/_search
 }
 
 # Search for datetime
+GET /users/_mapping
+
 GET /users/_search
 {
   "query": {

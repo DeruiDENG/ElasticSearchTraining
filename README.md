@@ -29,7 +29,7 @@ To make the workshop run more smoothly, please follow the steps before you atten
 ### Start the server
 Create an environment with:
 ```bash
-docker-compose up
+docker-compose up -d
 ```
 
 Elasticsearch should now be available on `http://localhost:9200`
@@ -39,11 +39,6 @@ Kibana should now be available on `http://localhost:5601`
 
 ### Stop the server
 Stop the environment with:
-```bash
-cmd+c
-```
-or
-
 ```bash
 docker-compose down
 ```

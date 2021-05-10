@@ -15,20 +15,18 @@ It assumes an instructor will verbally explain a lot of the material.
     - Match query
     - Range query
     - Bool query
-    - Sort the result
+    - Sorting of query results
 - Summary
 
-## Prerequisites
+## Before the workshop
 
-You need to install various software tools.
+To make the workshop run more smoothly, please follow the steps before you attend the workshop:
+* Install Docker following the instruction in https://docs.docker.com/engine/install/ (if they are not in your machine). Make sure `docker` and `docker-compose` commands are available in your terminal
+* Clone the repo to your local machine from this url: https://git.realestate.com.au/asia-workshops/elastic-search-workshop-101
+* In your terminal, go to the repo's root folder and run `docker-compose pull`. This will pull all the images needed by the workshop.
 
-Requirements:
-
-- Docker (if on OSX, Docker for Mac is recommended)
-- docker-compose
-
-
-## Notes
+## Useful commands
+### Start the server
 Create an environment with:
 ```bash
 docker-compose up
@@ -38,6 +36,8 @@ Elasticsearch should now be available on `http://localhost:9200`
 
 Kibana should now be available on `http://localhost:5601`
 
+
+### Stop the server
 Stop the environment with:
 ```bash
 cmd+c
@@ -48,7 +48,7 @@ or
 docker-compose down
 ```
 
-
+### Cleanup the server
 Cleanup the environment and delete all data with:
 ```bash
 docker-compose down --volumes --remove-orphans

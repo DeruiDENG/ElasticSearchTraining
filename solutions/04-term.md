@@ -1,12 +1,3 @@
-# Term query exercise
-Given a list of users
-* Create a query to get all the `Male` users
-* Create a query to get all the `Developer` and `Senior Developer`
-
-## Hints:
-* Be careful with field types, check the mapping first.
-* If you are stuck with solutions, refer to `04-term-query.md`
-
 ```text
 DELETE /users
 
@@ -27,6 +18,27 @@ GET /users/_mapping
 # Hints: Do not do term query on 'text' field
 
 # Create a query to get all the `Male` users
+GET /users/_search
+{
+  "query": {
+    "term": {
+      "gender.keyword": {
+        "value": "Male"
+      }
+    }
+  }
+}
 
-# Create a query to get all the `Developer` and `Senior Developer`
+# Create a query to get all the `Developer` and `Senior Developer` (not Lead Developer)
+GET /users/_search
+{
+  "query": {
+    "terms": {
+      "title.keyword": [
+        "Developer",
+        "Senior Developer"
+      ]
+    }
+  }
+}
 ```

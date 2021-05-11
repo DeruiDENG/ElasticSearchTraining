@@ -11,11 +11,11 @@ PUT /users
 
 POST /users/_bulk
 {"index":{}}
-{"name":"Larry Sanger","title":"Developer","yearOfBirth":1968,"gender":"male","address":"55 Station St, Fitzroy, VIC 3065"}
+{"name":"Larry Sanger","title":"Developer","yearOfBirth":1968,"gender":"male"}
 {"index":{}}
-{"name":"Magnus Manske","title":"Lead Developer","yearOfBirth":1974,"gender":"male","address":"25 Smith St, Coburg, VIC 3058"}
+{"name":"Magnus Manske","title":"Lead Developer","yearOfBirth":1974,"gender":"male"}
 {"index":{}}
-{"name":"Emna Mizouni","title":"Developer","yearOfBirth":1983,"gender":"female","address":"25 Smith St, Brunswick, VIC 3056"}
+{"name":"Emna Mizouni","title":"Developer","yearOfBirth":1983,"gender":"female"}
 
 # Search by a keyword
 GET /users/_search
@@ -42,6 +42,7 @@ GET /users/_search
 
 GET /users/_mapping
 
+# Query by keyword, the correct way
 # Attention: term query cannot be used in the text field
 GET /users/_search
 {
@@ -49,6 +50,17 @@ GET /users/_search
     "term": {
       "title.keyword": {
         "value": "Developer"
+      }
+    }
+  }
+}
+
+GET /users/_search
+{
+  "query": {
+    "term": {
+      "title.keyword": {
+        "value": "developer"
       }
     }
   }
@@ -66,5 +78,4 @@ GET /users/_search
     }
   }
 }
-
 ```

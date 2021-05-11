@@ -1,11 +1,12 @@
 # Mappings
 
-Define how a document and its fields are indexed
+When inserting a new document into the ES, ES will `index` the document to optimize for future queries.
 
-* Which string should be tokenized or treated as keywords
-* Field data types (e.g number, dates, geolocations)
-* How text field should be analyzed
-* etc
+Mapping defines how ES will index a document and its fields
+E.g.
+* Which field should be tokenized or treated as keywords
+* Which field can be queried as number, dates, or geolocations
+* How text field should be indexed and analyzed
 
 Two types:
 
@@ -101,50 +102,115 @@ POST /listing/_doc
   "ReferenceNumber": 101727193
 }
 
-GET /listing/_mapping
-
-# Add a field to existing mapping
-// Double check
-PUT /listing/_mapping
+POST /listing/_doc
 {
-  "properties": {
-    "ReferenceNumber": {
-      "type": "text"
-    }
-  }
+  "address": "Jalan PJU 3 Tropicana Golf Country Resorts, Tropicana Indah Resort Homes , Petaling Jaya, 47410, Selangor",
+  "postedDate": "2016-01-01",
+  "Storey": 3,
+  "ReferenceNumber": 123456
 }
 
 GET /listing/_mapping
 
-# Update the mapping of a field. (Will not work)
+# Add a field to existing mapping
 PUT /listing/_mapping
 {
   "properties": {
-    "ReferenceNumber": {
-      "type": "text"
+    "address": {
+      "type": "keyword"
     }
   }
 }
 
 # Multi-field mapping:
-# Add a mutli-field mapping
-PUT /listing/_mapping
+# Add a multi-field mapping
+POST /listing/_mapping
 {
   "properties": {
-    "ReferenceNumber": {
-      "type":"long",
+    "address": {
+      "type":"text",
       "fields": {
-        "english": {
-          "type": "text"
-        },
         "raw": {
-          "type":"keyword"
+          "type": "keyword"
         }
       }
     }
   }
 }
 
-// example of query
+GET /listing/_mapping
 
+# Query by keyword
+GET /listing/_search
+{
+  "query": {
+    "term": {
+      "address.raw": {
+        "value": "1 Churches St, Blakeview"
+      }
+    }
+  }
+}
+
+
+# After changing the mapping, to make it able for query, you have to do REINDEX
+# Create a new index with correct mapping
+PUT /new-listing
+
+PUT /new-listing/_mapping
+{
+  "properties": {
+    "address": {
+      "type":"text",
+      "fields": {
+        "raw": {
+          "type": "keyword"
+        }
+      }
+    },
+    "postedDate": {
+      "type": "date"
+    },
+    "Storey": {
+      "type": "long"
+    }
+  }
+}
+
+# Reindex the current index to the new index
+POST _reindex
+{
+  "source": {
+    "index": "listing"
+  },
+  "dest": {
+    "index": "new-listing"
+  }
+}
+
+GET /new-listing/_mapping
+
+GET /new-listing/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+# Query by keyword
+GET /new-listing/_search
+{
+  "query": {
+    "term": {
+      "address.raw": {
+        "value": "1 Churches St, Blakeview"
+      }
+    }
+  }
+}
 ```
+
+
+## Other options
+* Dynamic mapping with template
+* Runtime fields

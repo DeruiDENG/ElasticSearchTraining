@@ -1,28 +1,41 @@
 # Text Queries
+Full-text search in Elasticsearch
 
-Text analysis is the process of converting unstructured text, like the body of an email or a product description, into a
-structured format that’s optimized for search.
+When putting a document to ES, Text analysis takes place to convert unstructured text, like the body of an email or a product description, into a structured format that’s optimized for search.
+
+Use `match` query to perform full-text search.
 
 ```text
 DELETE /listing
 
 PUT /listing
 
+PUT /listing/_mapping
+{
+  "properties": {
+    "title": {
+      "type": "text",
+      "fields": {
+        "english":{
+          "type": "text",
+          "analyzer": "english"
+        }
+      }
+    },
+    "price": {
+      "type": "long"
+    }
+  }
+}
+
 # Put multiple documents into elastic search in one shot
 POST /listing/_bulk
 { "index": {}}
-{ "address": "9 Malambing Street, UP Village U.P.", "title": "3 Storey Townhouses (7 Units) in Teachers Village Quezon City", "price": 13 }
+{ "title": "3 Storey Townhouses (7 Units) in Teachers Village Quezon City", "price": 13 }
 { "index": {}}
-{ "address": "Philippines, Metro Manila, Quezon City, Batasan Hills Batasan Hills, Quezon City", "title": "2-Storey Townhouse for Sale in Filinvest Northview, QC", "price": 4.8 }
+{ "title": "2-Storey Townhouse for Sale in Filinvest Northview, QC", "price": 4.8 }
 { "index": {}}
-{ "address": "Bank Drive Ortigas Business Center behind SM Mega Mall Wack-Wack Greenhills, Mandaluyong", "title": "BSA Twin Towers Condo Unit near SM Megamall, ADB, La Salle, Poveda, Podium", "price": 18.5 }
-
-GET /listing/_search
-{
-  "query": {
-    "match_all": {}
-  }
-}
+{"title": "BSA Twin Towers Condo Unit near SM Megamall, ADB, La Salle, Poveda, Podium", "price": 18.5 }
 
 GET /listing/_mapping
 
@@ -36,12 +49,22 @@ GET /listing/_search
   }
 }
 
+# Full-text search for word: townhouse
+GET /listing/_search
+{
+  "query": {
+    "match": {
+      "title": "Townhouse"
+    }
+  }
+}
+
 # Will this work?
 GET /listing/_search
 {
   "query": {
     "match": {
-      "address": "manila"
+      "title": "townhouse"
     }
   }
 }
@@ -50,12 +73,43 @@ GET /listing/_search
 {
   "query": {
     "match": {
-      "address": "anila"
+      "title": "ownhouse"
     }
   }
 }
 
-// Introduce more powerful search
+# Use English analysizer to make ES understand English
+# Query for townhouse should also include townhouses
+GET /listing/_search
+{
+  "query": {
+    "match": {
+      "title.english": "townhouse"
+    }
+  }
+}
+
+GET /listing/_search
+{
+  "query": {
+    "match": {
+      "title.english": "townhouses"
+    }
+  }
+}
+
+# How analyzier work
+GET _analyze
+{
+  "analyzer": "english",
+  "text": "3 Storey Townhouses"
+}
+
+GET _analyze
+{
+  "analyzer": "english",
+  "text": "3 Storey Townhouse"
+}
 
 # Search for word in multiple fields
 GET /listing/_search
@@ -63,7 +117,7 @@ GET /listing/_search
   "query": {
     "multi_match": {
       "query": "Quezon", 
-      "fields": ["address","title"]
+      "fields": ["address","price"]
     }
   }
 }
@@ -91,10 +145,5 @@ GET /listing/_search
     }
   }
 }
-
 ```
-
-
-## Advanced topics:
-* Text analyzers
 

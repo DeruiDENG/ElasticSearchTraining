@@ -6,7 +6,7 @@ It assumes an instructor will verbally explain a lot of the material.
 
 ## Topics
 
-- Hello World
+- Welcome
 - Manage index
 - Indexing/putting documents 
 - Understand mappings

@@ -1,8 +1,3 @@
-# Bool query exercise
-For a list of users,
-* Query for users whose `gender is KNOWN`
-* Query for users whose `gender is UNKNOWN`
-
 ```text
 DELETE /users
 
@@ -18,6 +13,29 @@ POST /users/_bulk
 
 # Put your query in here
 # Write a query for users whose `gender is KNOWN`
+GET /users/_search
+{
+  "query": {
+    "exists": {
+      "field": "gender"
+    }
+  }
+}
 
 # Write a query for users whose `gender is UNKNOWN`
+# Hints: Refer to lecture note for how to use bool query
+GET /users/_search
+{
+  "query": {
+    "bool": {
+      "must_not": [
+        {
+          "exists": {
+            "field": "gender"
+          }
+        }
+      ]
+    }
+  }
+}
 ```

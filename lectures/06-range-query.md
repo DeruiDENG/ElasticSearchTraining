@@ -10,15 +10,16 @@ PUT /users
 
 POST /users/_bulk
 {"index":{}}
-{"name":"Larry Sanger","title":"Developer","dob":"1968-01-10","height":183,"gender":"male","address":"55 Station St, Fitzroy, VIC 3065"}
+{"name":"Larry Sanger","title":"Developer","dob":"1968-01-10","height":183,"gender":"male"}
 {"index":{}}
-{"name":"Magnus Manske","title":"Lead Developer","dob":"1974-01-02","height":170,"gender":"male","address":"25 Smith St, Coburg, VIC 3058"}
+{"name":"Magnus Manske","title":"Lead Developer","dob":"1974-01-02","height":170,"gender":"male"}
 {"index":{}}
-{"name":"Emna Mizouni","title":"Developer","dob":"1983-03-04","height":162,"gender":"female","address":"25 Smith St, Brunswick, VIC 3056"}
+{"name":"Emna Mizouni","title":"Developer","dob":"1983-03-04","height":162,"gender":"female"}
 
 GET /users/_mapping
 
 # Search by range
+# Query for people whose height is within a range
 # Keywords to use: gt(greater than), gte(greater than or equal to), lt(less than), lte(less than or equal to)
 GET /users/_search
 {
@@ -32,21 +33,24 @@ GET /users/_search
   }
 }
 
-# Search for datetime
+# Range query works for date time
 GET /users/_mapping
 
+# Query for people whose dob is within a given range
 GET /users/_search
 {
   "query": {
     "range": {
       "dob": {
-        "gte": "1970-01-01",
-        "lte": "1980-01-01"
+        "gte": "1980-01-01",
+        "lte": "now"
       }
     }
   }
 }
 
+# Query for people who was more than 40 years old
+# Date math syntax
 GET /users/_search
 {
   "query": {

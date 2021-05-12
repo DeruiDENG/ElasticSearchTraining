@@ -24,5 +24,8 @@ POST /users/_bulk
 
 # Put your query in here
 
+# Create a query to match all users, people with `taller height coming first`
+
+# If height of the users are the same, `younger people coming first`
 
 ```

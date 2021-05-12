@@ -7,14 +7,12 @@ PUT /listing
 
 # Put multiple documents into elastic search in one shot
 POST /listing/_bulk
-{ "index": {}}
-{ "price": 13, "year": 2018, "title":"18 Madge, Taman U-Thant, Ampang Hilir" }
-{ "index": {}}
-{ "price": 15, "year": 2018, "title":"Nobleton Crest, Taman U-Thant, Ampang Hilir" }
-{ "index": {}}
-{ "price": 15, "year": 2017, "title":"Nobleton Crest, Taman U-Thant, Ampang Hilir" }
-{ "index": {}}
-{ "price": 15, "year": 2010, "title":"Taman Sri Ukay, Ampang" }
+{"index":{}}
+{"price":13,"year":2018,"title":"18 Madge, Taman U-Thant, Ampang Hilir"}
+{"index":{}}
+{"price":15,"year":2018,"title":"Nobleton Crest, Taman U-Thant, Ampang Hilir"}
+{"index":{}}
+{"price":15,"year":2010,"title":"Taman Sri Ukay, Ampang"}
 
 # Default sort
 GET /listing/_search
@@ -50,6 +48,7 @@ GET /listing/_search
 }
 
 # Sort by multiple factors
+# Sort by year, then by price
 GET /listing/_search
 {
   "query": {
@@ -66,7 +65,11 @@ GET /listing/_search
         "order": "desc"
       }
     },
-    "_score"
+    {
+      "price": {
+        "order": "desc"
+      }
+    }
   ]
 }
 ```

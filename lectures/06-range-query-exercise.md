@@ -17,5 +17,11 @@ POST /users/_bulk
 {"name":"Emna Mizouni","title":"Developer","dob":"1983-03-04","height":162,"gender":"female","address":"25 Smith St, Brunswick, VIC 3056"}
 
 # Put your query in here
+# Create a query to get all the people with `170 < height < 185` (exclusive)
+# Hints: Use the range query. Check the lecture note about difference between lt, lte, gt, gte
+
+# Create a query to get all the people that is `older than 45 years old`
+# Hints: Use date math
+
 
 ```

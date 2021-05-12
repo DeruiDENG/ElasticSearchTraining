@@ -1,7 +1,3 @@
-# Compound query exercise
-Given a list of listings, 
-* Create a query get all the listing that is `in shanghai OR beijing, house property type AND sold before 2017-01-01`
-
 ```text
 DELETE /listing
 
@@ -25,11 +21,48 @@ POST /listing/_bulk
 {"index":{}}
 {"price":145,"propertyType":"land","city":"xian","sold":"2017-02-12"}
 
-# Start your work in here:
 # Create a query get all the listing that `the city is shanghai OR beijing, house property type AND price larger than 700`
 
-# Hints:Check the mapping before you start
+# Check the mapping before you start
 GET /listing/_mapping
 
-# Hints: Combine the usage of `should` and `must`
+GET /listing/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "term": {
+            "city.keyword": {
+              "value": "shanghai"
+            }
+          }
+        },
+        {
+          "term": {
+            "city.keyword": {
+              "value": "beijing"
+            }
+          }
+        }
+      ],
+      "must": [
+        {
+          "term": {
+            "propertyType.keyword": {
+              "value": "house"
+            }
+          }
+        },
+        {
+          "range": {
+            "price": {
+              "gte": 700
+            }
+          }
+        }
+      ]
+    }
+  }
+}
 ```

@@ -6,6 +6,7 @@ Give a list of users,
 Hints:
 * use match_all query
 * `sort` accepts multiple elements as an array
+* Consider dob date as a `number`, 2021-5-15 is `larger` than 2020-5-15
 
 ```text
 DELETE /users
